@@ -1,0 +1,56 @@
+erDiagram
+    USERS ||--o{ SUBSCRIPTIONS : "оформляет"
+    USERS ||--o{ REVIEWS : "пишет"
+    USERS ||--o{ VIEWING_HISTORY : "смотрит"
+    MOVIES ||--o{ REVIEWS : "получает"
+    MOVIES ||--o{ VIEWING_HISTORY : "просматривается"
+    GENRES ||--o{ MOVIES : "относится к"
+
+    USERS {
+        int user_id PK
+        varchar full_name
+        varchar email UK
+        varchar password_hash
+        date birth_date
+        date registered_at
+    }
+
+    GENRES {
+        int genre_id PK
+        varchar name UK
+    }
+
+    MOVIES {
+        int movie_id PK
+        varchar title
+        int release_year
+        int duration_minutes
+        numeric rating
+        int genre_id FK
+    }
+
+    SUBSCRIPTIONS {
+        int subscription_id PK
+        int user_id FK
+        varchar plan_type
+        date start_date
+        date end_date
+        numeric price
+    }
+
+    REVIEWS {
+        int review_id PK
+        int user_id FK
+        int movie_id FK
+        int rating
+        text comment
+        date review_date
+    }
+
+    VIEWING_HISTORY {
+        int history_id PK
+        int user_id FK
+        int movie_id FK
+        timestamp watched_at
+        int progress_percent
+    }
