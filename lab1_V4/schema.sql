@@ -23,12 +23,14 @@ CREATE TABLE movies (
 
 CREATE TABLE subscriptions (
     subscription_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     plan_type VARCHAR(20) NOT NULL CHECK (plan_type IN ('basic', 'standard', 'premium')),
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
     price NUMERIC(8,2) NOT NULL CHECK (price > 0),
-    CHECK (end_date > start_date)
+);
+
+CREATE TABLE active_subscriptions (
+    active_subscription_id SERIAL PRIMARY KEY,
+    subscription_id INT NOT NULL REFERENCES subscriptions(subscription_id) ON DELETE CASCADE,
+    user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE reviews (

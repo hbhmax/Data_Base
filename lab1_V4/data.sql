@@ -1,3 +1,6 @@
+INSERT INTO subscriptions (plan_type, price) VALUES
+('basic', 299.99), ('standard', 599.99), ('premium', 999.99);
+
 INSERT INTO genres (name) VALUES
 ('Drama'),
 ('Comedy'),
